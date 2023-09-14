@@ -1,0 +1,25 @@
+table,
+td {
+  border-collapse: collapse;
+  border: 1px solid black;
+  text-align: center;
+}
+
+td {
+  padding: 15px;
+}
+li {
+  text-align: left;
+  text-transform: capitalize;
+}
+
+.car--brand {
+  background-color: grey;
+  color: white;
+  padding: 10px 0;
+}
+
+.car--model {
+  background-color: lightgray;
+  color: white;
+}
