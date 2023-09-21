@@ -1,3 +1,4 @@
+import CARS from './cars.js';
 const container = document.querySelector("#app");
 const root = ReactDOM.createRoot(container);
 
