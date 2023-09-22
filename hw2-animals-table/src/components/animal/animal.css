@@ -1,0 +1,17 @@
+td {
+    border: 1px solid grey;
+    width: 50%;
+    text-align: center;
+    text-transform: capitalize;
+    padding: 5px;
+    font-size: 20px;;
+}
+
+td + td {
+    font-size: 40px;
+}
+
+.selected {
+    font-weight: bold;
+    background-color: #fce40f;
+}
