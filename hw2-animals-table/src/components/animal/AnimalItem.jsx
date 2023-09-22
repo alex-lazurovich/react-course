@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import "./animal.css";
+import "./AnimalItem.styles.css";
 
 export default class AnimalItem extends PureComponent {
   render() {

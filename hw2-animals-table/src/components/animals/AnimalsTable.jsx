@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import AnimalItem from "../animal/AnimalItem";
-import "./animals.css";
+import "./AnimalsTable.styles.css";
 
 const getArrayRandomIndex = (arr) => Math.floor(Math.random() * arr.length);
 
@@ -25,8 +25,7 @@ export default class AnimalsTable extends PureComponent {
           }),
           notSelectedAnimals: notSelectedAnimals.toSpliced(selectIndex, 1),
         }),
-        (state) => {
-          console.log("callback ", state, this.state);
+        () => {
           if (this.state.notSelectedAnimals.length === 0) {
             clearInterval(interval);
           }
