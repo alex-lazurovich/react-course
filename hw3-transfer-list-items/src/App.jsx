@@ -1,29 +1,36 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
-import { LIST_ITEMS } from "./constants/items.js";
 import ItemsBlock from "./components/ItemsBlock/ItemsBlock";
 
 function App() {
-  const [firstBlockItems, setFirstBlockItems] = useState(LIST_ITEMS);
+  const [firstBlockItems, setFirstBlockItems] = useState([]);
   const [secondBlockItems, setSecondBlockItems] = useState([]);
   const [thirdBlockItems, setThirdBlockItems] = useState([]);
+
+  useEffect(() => {
+    async function getItems() {
+      const items = await import("./constants/items.json");
+      setFirstBlockItems(items.default);
+    }
+    getItems();
+  }, []);
 
   const moveFirstToSecond = () => {
     const item = { ...firstBlockItems[0] };
     setFirstBlockItems((items) => items.toSpliced(0, 1));
-    setSecondBlockItems((items) => [{ ...item }, ...items]);
+    setSecondBlockItems((items) => [item, ...items]);
   };
 
   const moveSecondToFirst = () => {
     const item = { ...secondBlockItems[0] };
     setSecondBlockItems((items) => items.toSpliced(0, 1));
-    setFirstBlockItems((items) => [{ ...item }, ...items]);
+    setFirstBlockItems((items) => [item, ...items]);
   };
 
   const moveSecondToThird = () => {
     const item = { ...secondBlockItems[0] };
     setSecondBlockItems((items) => items.toSpliced(0, 1));
-    setThirdBlockItems((items) => [{ ...item }, ...items]);
+    setThirdBlockItems((items) => [item, ...items]);
   };
 
   const removeLastFromThird = () => {
@@ -47,7 +54,7 @@ function App() {
       </ItemsBlock>
       <ItemsBlock items={thirdBlockItems}>
         {thirdBlockItems && thirdBlockItems.length ? (
-          <button onClick={removeLastFromThird}>Remove first</button>
+          <button onClick={removeLastFromThird}>Remove last item</button>
         ) : null}
       </ItemsBlock>
     </>
