@@ -1,0 +1,15 @@
+.block--container {
+  min-height: 50vh;
+  min-width: 20vw;
+  border: 1px solid black;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  padding: 10px;
+
+  ul {
+    width: 100%;
+  }
+}
