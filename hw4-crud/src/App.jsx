@@ -25,14 +25,13 @@ function App() {
   const [sortedExpenses, setSortedExpenses] = useState([]);
 
   useEffect(() => {
-    setSortedExpenses((expenses) => {
-      const toSort = expenses.length ? [...expenses] : [...allExpenses];
+    setSortedExpenses(() => {
+      const toSort = [...allExpenses];
       let sortingFunction;
       if (sortBy === SortingTypes.DATE) sortingFunction = sortDates(sortBy);
       else if (sortBy === SortingTypes.PRICE)
         sortingFunction = sortNumbers(sortBy);
       else sortingFunction = sortStrings(sortBy);
-
       return toSort.sort(sortingFunction);
     });
   }, [allExpenses, sortBy]);
@@ -40,6 +39,15 @@ function App() {
   const sortHandler = (sortType) => {
     setSortBy(sortType);
   };
+
+  const deleteItemHandler = (id) => {
+    setAllExpenses((expenses) => expenses.filter((e) => e.id !== id));
+  };
+
+  const updateItemHandler = (item) =>
+    setAllExpenses((expenses) =>
+      expenses.map((expense) => (expense.id === item.id ? item : expense))
+    );
 
   useEffect(() => {
     const fetchExpenses = async () => {
@@ -58,7 +66,11 @@ function App() {
       {allExpenses.length > 0 ? (
         <>
           <SortTypeSelector liftingSortType={sortHandler} />
-          <Expenses expenses={sortedExpenses} />
+          <Expenses
+            expenses={sortedExpenses}
+            liftingDelete={deleteItemHandler}
+            liftingUpdate={updateItemHandler}
+          />
         </>
       ) : (
         <p>Loading...</p>
