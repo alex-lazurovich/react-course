@@ -7,6 +7,7 @@ const expenses = {
   delete: (id) => axios.delete(`${API}/${id}`).then(({ data }) => data),
   update: (id, payload) =>
     axios.put(`${API}/${id}`, payload).then(({ data }) => data),
+  create: (payload) => axios.post(API, payload).then(({ data }) => data),
 };
 
 export default expenses;
