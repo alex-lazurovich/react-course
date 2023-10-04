@@ -3,14 +3,20 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
 import Expense from "../Expense/Expense";
+import { memo } from "react";
 
-export default function Expenses({ expenses, liftingDelete, liftingUpdate }) {
+const Expenses = memo(function Expenses({
+  expenses,
+  liftingDelete,
+  liftingUpdate,
+}) {
   const deleteHandler = (id) => {
     liftingDelete(id);
   };
   const updateHandler = (r) => {
     liftingUpdate(r);
   };
+  console.log("expenses");
   return (
     <Grid>
       {expenses.map((expense) => (
@@ -23,4 +29,6 @@ export default function Expenses({ expenses, liftingDelete, liftingUpdate }) {
       ))}
     </Grid>
   );
-}
+});
+
+export default Expenses;

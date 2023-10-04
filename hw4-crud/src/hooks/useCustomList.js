@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import expenses from "../services/expenses";
 import { SortingTypes } from "../constants/sorting";
 import { sortDates, sortNumbers, sortStrings } from "./../utils/sort";
@@ -46,18 +46,19 @@ const useCustomList = () => {
     setSortBy(sortType);
   };
 
-  const deleteItemHandler = (id) => {
+  const deleteItemHandler = useCallback((id) => {
     setAllExpenses((expenses) => expenses.filter((e) => e.id !== id));
-  };
+  }, []);
 
   const filterHandler = () => {
     setFiltered(!filtered);
   };
 
-  const updateItemHandler = (item) =>
+  const updateItemHandler = useCallback((item) => {
     setAllExpenses((expenses) =>
       expenses.map((expense) => (expense.id === item.id ? item : expense))
     );
+  }, []);
 
   const createHandler = async () => {
     try {

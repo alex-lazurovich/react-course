@@ -10,8 +10,14 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import dayjs from "dayjs";
 import expenses from "../../services/expenses";
 
-export default function Expense({ expense, liftingDelete, liftingUpdate }) {
+const Expense = React.memo(function Expense({
+  expense,
+  liftingDelete,
+  liftingUpdate,
+}) {
   const { date, productName, cost, currency, description, id } = expense;
+
+  console.log("### in Expense");
 
   const formattedDate = () => new Date(date).toDateString();
 
@@ -25,6 +31,7 @@ export default function Expense({ expense, liftingDelete, liftingUpdate }) {
   };
 
   const changeDateHandler = async (e) => {
+    console.log("changeDateHandler");
     try {
       const r = await expenses.update(id, {
         ...expense,
@@ -61,8 +68,9 @@ export default function Expense({ expense, liftingDelete, liftingUpdate }) {
         onClick={deleteHandler}
       >
         delete
-        <DeleteForeverIcon />
+        <DeleteForeverIcon />ź
       </Button>
     </Card>
   );
-}
+});
+export default Expense;
